@@ -1,0 +1,25 @@
+﻿@page "/options"
+@using System.Text.Json;
+@using Una.Presentation.Wasm.Models;
+@using Una.Presentation.Wasm.Services.Providers;
+@using Una.Presentation.Wasm.Utilities;
+@inject NavigationManager navigationManager;
+@inject IRequestProvider requestProvider;
+@inject HttpClient Http
+
+<div class="text-center">
+    <h1>Inserir Usuários de Demonstração</h1>
+    <button class="btn btn-primary" @onclick="AddMockDataAsync">Adicionar Dados de Demonstração</button>
+</div>
+
+@code {
+    private async Task AddMockDataAsync()
+    {
+        var users = await Http.GetFromJsonAsync<List<User>>("sample/users.json");
+
+        var uri = $"{GlobalSettings.BaseUrl}/users/seed";
+        var createdUser = await requestProvider.PostAsync<User>(uri, users);
+
+        navigationManager.NavigateTo("/users");
+    }
+}

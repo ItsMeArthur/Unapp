@@ -1,6 +1,6 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">Una WASM</a>
+        <a class="navbar-brand" href="">Unapp</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -10,10 +10,9 @@
 <div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
     <nav class="flex-column">
         <div class="nav-item px-3">
-            
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="oi oi-home" aria-hidden="true"></span>Home
-            </NavLink>1
+            </NavLink>
         </div>
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="users">
@@ -24,6 +23,12 @@
             <NavLink class="nav-link" href="users/create">
                 <span class="oi oi-plus" aria-hidden="true"></span>
                 Adicionar
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="options">
+                <span class="oi oi-cog" aria-hidden="true"></span>
+                Configurações
             </NavLink>
         </div>
     </nav>

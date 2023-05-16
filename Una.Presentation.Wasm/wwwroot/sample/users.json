@@ -1,0 +1,112 @@
+﻿[
+  {
+    "name": "João Silva",
+    "email": "joao.silva@gmail.com",
+    "username": "joaosilva",
+    "password": "senha123",
+    "gender": "male",
+    "dateOfBirth": "1978-07-10T00:00:00",
+    "isActive": true,
+    "createdAt": "2023-05-16T10:30:00",
+    "updatedAt": null
+  },
+  {
+    "name": "Pedro Santos",
+    "email": "pedro.santos@hotmail.com",
+    "username": "pedrosantos",
+    "password": "123456",
+    "gender": "male",
+    "dateOfBirth": "1980-11-23T00:00:00",
+    "isActive": true,
+    "createdAt": "2023-05-16T10:30:00",
+    "updatedAt": null
+  },
+  {
+    "name": "Lucas Oliveira",
+    "email": "lucas.oliveira@yahoo.com",
+    "username": "lucasoliveira",
+    "password": "senha456",
+    "gender": "male",
+    "dateOfBirth": "1992-03-05T00:00:00",
+    "isActive": true,
+    "createdAt": "2023-05-16T10:30:00",
+    "updatedAt": null
+  },
+  {
+    "name": "Rafael Almeida",
+    "email": "rafael.almeida@gmail.com",
+    "username": "rafaelalmeida",
+    "password": "senha789",
+    "gender": "male",
+    "dateOfBirth": "1997-09-17T00:00:00",
+    "isActive": true,
+    "createdAt": "2023-05-16T10:30:00",
+    "updatedAt": null
+  },
+  {
+    "name": "Fernando Costa",
+    "email": "fernando.costa@hotmail.com",
+    "username": "fernandocosta",
+    "password": "123abc",
+    "gender": "male",
+    "dateOfBirth": "1988-01-30T00:00:00",
+    "isActive": true,
+    "createdAt": "2023-05-16T10:30:00",
+    "updatedAt": null
+  },
+  {
+    "name": "Ana Santos",
+    "email": "ana.santos@gmail.com",
+    "username": "anasantos",
+    "password": "senha123",
+    "gender": "female",
+    "dateOfBirth": "1982-08-15T00:00:00",
+    "isActive": true,
+    "createdAt": "2023-05-16T10:30:00",
+    "updatedAt": null
+  },
+  {
+    "name": "Maria Oliveira",
+    "email": "maria.oliveira@hotmail.com",
+    "username": "mariaoliveira",
+    "password": "123456",
+    "gender": "female",
+    "dateOfBirth": "1987-04-29T00:00:00",
+    "isActive": true,
+    "createdAt": "2023-05-16T10:30:00",
+    "updatedAt": null
+  },
+  {
+    "name": "Juliana Silva",
+    "email": "juliana.silva@yahoo.com",
+    "username": "julianasilva",
+    "password": "senha456",
+    "gender": "female",
+    "dateOfBirth": "1995-11-03T00:00:00",
+    "isActive": true,
+    "createdAt": "2023-05-16T10:30:00",
+    "updatedAt": null
+  },
+  {
+    "name": "Isabela Almeida",
+    "email": "isabela.almeida@gmail.com",
+    "username": "isabelaalmeida",
+    "password": "senha789",
+    "gender": "female",
+    "dateOfBirth": "1990-07-22T00:00:00",
+    "isActive": true,
+    "createdAt": "2023-05-16T10:30:00",
+    "updatedAt": null
+  },
+  {
+    "name": "Camila Costa",
+    "email": "camila.costa@hotmail.com",
+    "username": "camilacosta",
+    "password": "123abc",
+    "gender": "female",
+    "dateOfBirth": "1989-02-11T00:00:00",
+    "isActive": true,
+    "createdAt": "2023-05-16T10:30:00",
+    "updatedAt": null
+  }
+]

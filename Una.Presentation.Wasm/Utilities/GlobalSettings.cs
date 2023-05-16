@@ -2,6 +2,6 @@
 {
     public static class GlobalSettings
     {
-        public const string BaseUrl = "https://localhost:7217/api";
+        public const string BaseUrl = "https://unapi.azurewebsites.net/api";
     }
 }

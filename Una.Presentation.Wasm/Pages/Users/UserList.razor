@@ -3,11 +3,12 @@
 @using Una.Presentation.Wasm.Services;
 @using Una.Presentation.Wasm.Services.Providers;
 @using Una.Presentation.Wasm.Utilities;
+@using Una.Presentation.Wasm.Extensions
 @inject IRequestProvider requestProvider;
 
 <PageTitle>Usuários</PageTitle>
 
-<h1>Listagem de Usuários</h1>
+<h1>Listagem de usuários</h1>
 
 @if (users == null)
 {
@@ -22,13 +23,14 @@ else
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Usuário</th>
-                <th>Password</th>
+                <th>Senha</th>
                 <th>Gender</th>
                 <th>Nascimento</th>
                 <th>Idade</th>
                 <th>Ativo</th>
                 <th>Criação</th>
                 <th>Alteração</th>
+                <th>Ação</th>
             </tr>
         </thead>
         <tbody>
@@ -36,15 +38,22 @@ else
             {
                 <tr>
                     <td>@user.Id</td>
-                    <td>@user.Name</td>
+                    <td>
+                        <a href='/users/@user.Id'>@user.Name</a>
+                    </td>
                     <td>@user.Email</td>
                     <td>@user.Username</td>
-                    <td>@user.Password</td>
+                    <td>@user.Password.Mask()</td>
                     <td>@user.Gender</td>
                     <td>@user.DateOfBirth</td>
                     <td>@(DateTime.Now.Year - user.DateOfBirth.Year)</td>
+                    <td>@user.IsActive</td>
                     <td>@user.CreatedAt</td>
                     <td>@user.UpdatedAt</td>
+                    <td>
+                        <a class="btn btn-primary" href='/users/edit/@user.Id'>Editar</a>
+                        <a class="btn btn-danger" @onclick="() => DeleteAsync(user.Id)">Deletar</a>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -59,5 +68,12 @@ else
     {
         var uri = $"{GlobalSettings.BaseUrl}/users";
         users = await requestProvider.GetAsync<List<User>>(uri);
+    }
+
+    protected async Task DeleteAsync(int id)
+    {
+        var uri = $"{GlobalSettings.BaseUrl}/users/{id}";
+        await requestProvider.DeleteAsync(uri);
+        await OnInitializedAsync();
     }
 }

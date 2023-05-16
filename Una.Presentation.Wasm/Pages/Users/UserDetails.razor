@@ -1,0 +1,85 @@
+﻿@page "/users/{id}"
+@using Una.Presentation.Wasm.Extensions;
+@using Una.Presentation.Wasm.Models;
+@using Una.Presentation.Wasm.Services.Providers;
+@using Una.Presentation.Wasm.Utilities;
+@inject IRequestProvider requestProvider;
+@inject NavigationManager navigationManager;
+
+<PageTitle>Usuário</PageTitle>
+
+<h1>Informações do usuário</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="name" class="h5 text-muted">Nome</label>
+            <h4 id="name" class="text-black">@user.Name</h4>
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="h5 text-muted">Email</label>
+            <h4 id="email" class="text-black">@user.Email</h4>
+        </div>
+
+        <div class="form-group">
+            <label for="username" class="h5 text-muted">Usuário</label>
+            <h4 id="username" class="text-black">@user.Username</h4>
+        </div>
+
+        <div class="form-group">
+            <label for="password" class="h5 text-muted">Senha</label>
+            <h4 id="password" class="text-primary">@user.Password</h4>
+        </div>
+
+        <div class="form-group">
+            <label for="gender" class="h5 text-muted">Gênero</label>
+            <h4 id="gender" class="text-black">@user.Gender</h4>
+        </div>
+
+        <div class="form-group">
+            <label for="birthDate" class="h5 text-muted">Nascimento</label>
+            <h4 id="birthDate" class="text-black">@user.DateOfBirth.ToShortDateString()</h4>
+        </div>
+
+        <div class="form-group">
+            <label for="isActive" class="h5 text-muted">Ativo</label>
+            <h4 id="isActive" class="text-black">@((user.IsActive) ? "Sim" : "Não")</h4>
+        </div>
+
+        <div class="text-right">
+            <a class="btn btn-secondary" href='/users'>Voltar</a>
+            <button class="btn btn-primary" @onclick="() => DeleteAsync(user.Id)">Excluir Usuário</button>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public string Id { get; set; }
+
+    private User user = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var uri = $"{GlobalSettings.BaseUrl}/users/{Id}";
+        var userToUpdate = await requestProvider.GetAsync<User>(uri);
+
+        user.Id = userToUpdate.Id;
+        user.Name = userToUpdate.Name;
+        user.Email = userToUpdate.Email;
+        user.Username = userToUpdate.Username;
+        user.Password = userToUpdate.Password.Mask();
+        user.Gender = userToUpdate.Gender;
+        user.DateOfBirth = userToUpdate.DateOfBirth;
+        user.IsActive = userToUpdate.IsActive;
+    }
+
+    protected async Task DeleteAsync(int id)
+    {
+        var uri = $"{GlobalSettings.BaseUrl}/users/{id}";
+        await requestProvider.DeleteAsync(uri);
+        navigationManager.NavigateTo("/users");
+    }
+}

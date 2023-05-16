@@ -69,11 +69,18 @@ namespace Una.Presentation.API.Controllers
             existingUser.DateOfBirth = updatedUser.DateOfBirth;
             existingUser.Gender = updatedUser.Gender;
             existingUser.IsActive = updatedUser.IsActive;
-            existingUser.UpdatedAt = updatedUser.UpdatedAt;
+            existingUser.UpdatedAt = DateTime.UtcNow;
 
-            await _repository.UpdateAsync(existingUser);
+            var result = await _repository.UpdateAsync(existingUser);
 
-            return NoContent();
+            if (result)
+            {
+                return NoContent();
+            }
+            else
+            {
+                return StatusCode(500, "Ocorreu um erro ao salvar as alterações.");
+            }
         }
 
         [HttpDelete("{id}")]
@@ -86,9 +93,16 @@ namespace Una.Presentation.API.Controllers
                 return NotFound();
             }
 
-            await _repository.DeleteAsync(existingUser);
+            var result =  await _repository.DeleteAsync(existingUser);
 
-            return NoContent();
+            if (result)
+            {
+                return NoContent();
+            }
+            else
+            {
+                return StatusCode(500, "Ocorreu um erro ao excluir o registro.");
+            }
         }
     }
 }

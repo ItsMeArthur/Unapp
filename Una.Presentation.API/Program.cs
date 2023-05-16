@@ -14,7 +14,7 @@ namespace Una.Presentation.API
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbContext<UnaDbContext>(options =>
             {
-                options.UseSqlite("Data Source=Una.db");
+                options.UseInMemoryDatabase("UnappDb");
             });
 
             builder.Services.AddAuthorization();
@@ -23,7 +23,6 @@ namespace Una.Presentation.API
             builder.Services.AddControllers();
             builder.Services.AddCors(options =>
             {
-                //options.AddPolicy("Open", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
                 options.AddDefaultPolicy(builder =>
                 {
                     builder.AllowAnyOrigin()

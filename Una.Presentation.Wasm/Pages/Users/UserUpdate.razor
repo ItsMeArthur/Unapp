@@ -1,13 +1,13 @@
-﻿@page "/users/create"
+﻿@page "/users/edit/{id}"
 @using Una.Presentation.Wasm.Models;
 @using Una.Presentation.Wasm.Services.Providers;
 @using Una.Presentation.Wasm.Utilities;
 @inject IRequestProvider requestProvider;
 @inject NavigationManager navigationManager;
 
-<PageTitle>Criar Usuário</PageTitle>
+<PageTitle>Editar Usuário</PageTitle>
 
-<h1>Criar novo usuário</h1>
+<h3>Editar Usário</h3>
 
 <div class="row">
     <div class="col-md-6">
@@ -54,27 +54,39 @@
         </div>
 
         <div class="text-right">
-            <button class="btn btn-primary" @onclick="CreateUserAsync">Criar Usuário</button>
+            <button class="btn btn-primary" @onclick="UpdateUserAsync">Savar Alterações</button>
         </div>
     </div>
 </div>
 
 @code {
 
+    [Parameter]
+    public string Id { get; set; }
+
     private User user = new();
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        user.DateOfBirth = DateTime.Now.Date;
-        user.Gender = "Male";
-        user.IsActive = true;
+        var uri = $"{GlobalSettings.BaseUrl}/users/{Id}";
+        var userToUpdate = await requestProvider.GetAsync<User>(uri);
+
+        user.Id = userToUpdate.Id;
+        user.Name = userToUpdate.Name;
+        user.Email = userToUpdate.Email;
+        user.Username = userToUpdate.Username;
+        user.Password = userToUpdate.Password;
+        user.Gender = userToUpdate.Gender;
+        user.DateOfBirth = userToUpdate.DateOfBirth;
+        user.IsActive = userToUpdate.IsActive;
     }
 
-    private async Task CreateUserAsync()
+    private async Task UpdateUserAsync()
     {
-        var uri = $"{GlobalSettings.BaseUrl}/users";
-        var createdUser = await requestProvider.PostAsync<User>(uri, user);
-        if (createdUser != null)
+        var uri = $"{GlobalSettings.BaseUrl}/users/{Id}";
+        var updatedUser = await requestProvider.PutAsync<User>(uri, user);
+
+        if (updatedUser != null)
         {
             navigationManager.NavigateTo("/");
         }
