@@ -1,0 +1,63 @@
+﻿@page "/users"
+@using Una.Presentation.Wasm.Models;
+@using Una.Presentation.Wasm.Services;
+@using Una.Presentation.Wasm.Services.Providers;
+@using Una.Presentation.Wasm.Utilities;
+@inject IRequestProvider requestProvider;
+
+<PageTitle>Usuários</PageTitle>
+
+<h1>Listagem de Usuários</h1>
+
+@if (users == null)
+{
+    <p><em>Carregando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Usuário</th>
+                <th>Password</th>
+                <th>Gender</th>
+                <th>Nascimento</th>
+                <th>Idade</th>
+                <th>Ativo</th>
+                <th>Criação</th>
+                <th>Alteração</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in users)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.Name</td>
+                    <td>@user.Email</td>
+                    <td>@user.Username</td>
+                    <td>@user.Password</td>
+                    <td>@user.Gender</td>
+                    <td>@user.DateOfBirth</td>
+                    <td>@(DateTime.Now.Year - user.DateOfBirth.Year)</td>
+                    <td>@user.CreatedAt</td>
+                    <td>@user.UpdatedAt</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code 
+{
+    private List<User> users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var uri = $"{GlobalSettings.BaseUrl}/users";
+        users = await requestProvider.GetAsync<List<User>>(uri);
+    }
+}
