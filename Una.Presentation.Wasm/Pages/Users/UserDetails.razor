@@ -49,7 +49,8 @@
 
         <div class="text-right">
             <a class="btn btn-secondary" href='/users'>Voltar</a>
-            <button class="btn btn-primary" @onclick="() => DeleteAsync(user.Id)">Excluir Usuário</button>
+            <a class="btn btn-primary" href='/users/edit/@user.Id'>Editar</a>
+            <button class="btn btn-danger" @onclick="() => DeleteAsync(user.Id)">Excluir Usuário</button>
         </div>
     </div>
 </div>

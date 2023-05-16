@@ -55,7 +55,7 @@ namespace Una.Presentation.Wasm.Services.Providers
             return result;
         }
 
-        public async Task<TResult> PutAsync<TResult>(string uri, object data, string header = "")
+        public async Task<bool> PutAsync<TResult>(string uri, object data, string header = "")
         {
             HttpClient httpClient = GetOrCreateHttpClient();
 
@@ -69,10 +69,7 @@ namespace Una.Presentation.Wasm.Services.Providers
             HttpResponseMessage response = await httpClient.PutAsync(uri, requestContent).ConfigureAwait(false);
 
             await HandleResponse(response).ConfigureAwait(false);
-
-            var responseContent = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<TResult>(responseContent);
-            return result;
+            return true;
         }
 
         public async Task<bool> DeleteAsync(string uri)

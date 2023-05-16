@@ -84,11 +84,11 @@
     private async Task UpdateUserAsync()
     {
         var uri = $"{GlobalSettings.BaseUrl}/users/{Id}";
-        var updatedUser = await requestProvider.PutAsync<User>(uri, user);
+        var isUpdated = await requestProvider.PutAsync<User>(uri, user);
 
-        if (updatedUser != null)
+        if (isUpdated)
         {
-            navigationManager.NavigateTo("/");
+            navigationManager.NavigateTo($"/users/{Id}");
         }
         else
         {
